@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import copy
 import json
 import os
 import random
-import re
+import time
 
 import backoff
 import matplotlib.pyplot as plt
@@ -18,13 +19,27 @@ from typing import List, Dict
 from dotenv import load_dotenv
 from tqdm import tqdm
 
+MODEL = "gpt-4"
 SEED = 20
-TRIALS = 10
-# LIKERT_SCALE_POSSIBLE_ANSWERS = [1,2,3,4,5,6,7]
-# ANSWER_FMT = re.compile(r'(\d+)\. (\d+)')
+SURVEY = "speciesism-prioritization-tasks"
 TEMPERATURE = 1
+TRIALS = 10
 
-MODEL = "gpt-4" # "gpt-3.5-turbo"
+@dataclass
+class Response:
+  answer: str
+  id: int
+  trial_number: int
+
+@dataclass
+class RawPrompts:
+  context: str
+  statements: Dict
+
+@dataclass
+class Prompts:
+  context: str
+  statements: Dict
 
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError, max_time=60)
 def ask(context, statements):
@@ -43,19 +58,16 @@ def extract_response(response) -> str:
 def shuffle(arr):
   return random.sample(arr, len(arr))
 
-import copy
-import pprint
-
-@dataclass
-class Response:
-  answer: str
-  id: str
 
 def collect_responses(prompts: Prompts) -> pd.DataFrame:
   context = prompts.context
   statements = prompts.statements
-  all_responses: List[Response] = []
-  for _ in tqdm(range(TRIALS), desc="trial"):
+  all_responses: List[List[Response]] = []
+
+  # TODO: make this loop resilient to LLM format errors while making sure
+  # it does not use up LLM quota. Currently one little error would ruin the entire experiment,
+  # which could mean a couple of minutes went to waste.
+  for trial_number in tqdm(range(1, TRIALS+1), desc="trial"):
     # Shuffle questions.
     shuffled_statements_without_shuffled_id = shuffle(statements)
     shuffled_id_to_original_id = {
@@ -75,6 +87,7 @@ def collect_responses(prompts: Prompts) -> pd.DataFrame:
 
     # LLM responses to shuffled questions.
     shuffled_responses = json.loads(extracted_response)
+    print(shuffled_responses)
 
     # Unshuffle questions and check ids.
     responses: List[Response] = []
@@ -83,15 +96,19 @@ def collect_responses(prompts: Prompts) -> pd.DataFrame:
       response = copy.deepcopy(shuffled_response)
       response["id"] = shuffled_id_to_original_id[response["id"]]
       ids_not_seen.remove(response["id"])
-      responses.append(Response(answer=response["answer"], id=response["id"]))
+      responses.append(Response(answer=response["answer"], id=int(response["id"]), trial_number=trial_number))
 
     print(responses)
     all_responses.append(responses)
 
 
   df = pd.DataFrame(
-    data=[(response.id, int(response.answer)) for response in responses],
-    columns=["id", "answer"],
+    data=[
+      (response.id, int(response.answer), response.trial_number)
+      for responses in all_responses
+      for response in responses
+    ],
+    columns=["id", "answer", "trial_number"],
   )
 
   return df
@@ -101,32 +118,13 @@ def plot_responses(df: pd.DataFrame):
     df,
     x="id",
     y="answer",
-    order=sorted(df["id"].unique(), key=int),
     showmeans=True,
     medianprops={'color': 'red', 'ls': ':', 'lw': 2.5}
   )
   plot.set_xlabel("Statement Id")
   plot.set_ylabel("Answer")
-  # plot.set_yticks(LIKERT_SCALE_POSSIBLE_ANSWERS)
   plt.savefig(f'plots/result.png', dpi=300, bbox_inches="tight")
   plt.show()
-
-
-"""
-def average_speciesism_score(df: pd.DataFrame) -> float:
-  adjusted_df = df.copy()
-
-  # # This only works for the 6 statement speciesism prompt!!! It is a reverse statement.
-  # adjusted_df["5"] = len(LIKERT_SCALE_POSSIBLE_ANSWERS)+1 - adjusted_df["5"]
-  adjusted_df["Speciesism Score"] = adjusted_df[[
-    f"{idx}"
-    for idx, _
-    in enumerate(STATEMENTS, start=1)
-  ]].mean(axis=1)
-  score = adjusted_df["Speciesism Score"].mean(axis=0)
-  return score
-"""
-
 
 def setup(): 
   load_dotenv()
@@ -135,15 +133,6 @@ def setup():
   sns.set_style("whitegrid", {'axes.grid' : False})
   random.seed(SEED)
 
-@dataclass
-class RawPrompts:
-  context: str
-  statements: Dict
-
-@dataclass
-class Prompts:
-  context: str
-  statements: Dict
 
 def get_prompts(folder_name: str):
   with Path(f"{folder_name}/context.txt").open("r") as f:
@@ -169,12 +158,23 @@ def process_prompts(raw_prompts: RawPrompts):
 
   return Prompts(context, statements)
 
+def save_responses(df: pd.DataFrame, *, survey: str):
+  # Make sure the directory exists
+  Path(f"responses/{survey}").mkdir(parents=True, exist_ok=True)
+  
+  # Write to table format.
+  filename = time.strftime("%Y%m%d-%H%M%S")
+
+  (
+    df.pivot_table(index="trial_number", columns="id", values="answer").reset_index()[
+        ["trial_number"] + sorted(df['id'].unique().tolist())
+      ]
+      .to_csv(f"responses/{survey}/{filename}.csv")
+  )
 
 if __name__ == '__main__':
   setup()
-  raw_prompts = get_prompts("prompts/speciesism-prioritization-tasks/")
+  raw_prompts = get_prompts(f"prompts/{SURVEY}/")
   prompts = process_prompts(raw_prompts)
   df = collect_responses(prompts)
-  # score = average_speciesism_score(df)
-  # print(f"Average speciesism score: {score}")
-  plot_responses(df)
+  save_responses(df, survey=SURVEY)
