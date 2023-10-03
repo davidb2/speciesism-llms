@@ -169,7 +169,7 @@ def save_responses(df: pd.DataFrame, *, survey: str):
     df.pivot_table(index="trial_number", columns="id", values="answer").reset_index()[
         ["trial_number"] + sorted(df['id'].unique().tolist())
       ]
-      .to_csv(f"responses/{survey}/{filename}.csv")
+      .to_csv(f"responses/{survey}/{filename}.csv", index=False)
   )
 
 if __name__ == '__main__':
