@@ -1,0 +1,275 @@
+{
+  "questions": {
+    "person-dog": [
+      {
+        "id": "1",
+        "scenario": "On one boat, there is 1 person and on the other boat, there is 1 dog.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "1 dog"
+        }
+      },
+      {
+        "id": "2",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 2 dogs.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "2 dogs"
+        }
+      },
+      {
+        "id": "3",
+        "scenario": "On one boat, there are 2 people and on the other boat, there is 1 dog.",
+        "options": {
+          "1": "2 people",
+          "2": "Can't decide",
+          "3": "1 dog"
+        }
+      },
+      {
+        "id": "4",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 10 dogs.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "10 dogs"
+        }
+      },
+      {
+        "id": "5",
+        "scenario": "On one boat, there are 10 people and on the other boat, there is 1 dog.",
+        "options": {
+          "1": "10 people",
+          "2": "Can't decide",
+          "3": "1 dog"
+        }
+      },
+      {
+        "id": "6",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 100 dogs.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "100 dogs"
+        }
+      },
+      {
+        "id": "7",
+        "scenario": "On one boat, there are 100 people and on the other boat, there is 1 dog.",
+        "options": {
+          "1": "100 people",
+          "2": "Can't decide",
+          "3": "1 dog"
+        }
+      }
+    ],
+    "person-pig": [
+      {
+        "id": "8",
+        "scenario": "On one boat, there is 1 person and on the other boat, there is 1 pig.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "1 pig"
+        }
+      },
+      {
+        "id": "9",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 2 pigs.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "2 pigs"
+        }
+      },
+      {
+        "id": "10",
+        "scenario": "On one boat, there are 2 people and on the other boat, there is 1 pig.",
+        "options": {
+          "1": "2 people",
+          "2": "Can't decide",
+          "3": "1 pig"
+        }
+      },
+      {
+        "id": "11",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 10 pigs.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "10 pigs"
+        }
+      },
+      {
+        "id": "12",
+        "scenario": "On one boat, there are 10 people and on the other boat, there is 1 pig.",
+        "options": {
+          "1": "10 people",
+          "2": "Can't decide",
+          "3": "1 pig"
+        }
+      },
+      {
+        "id": "13",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 100 pigs.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "100 pigs"
+        }
+      },
+      {
+        "id": "14",
+        "scenario": "On one boat, there are 100 people and on the other boat, there is 1 pig.",
+        "options": {
+          "1": "100 people",
+          "2": "Can't decide",
+          "3": "1 pig"
+        }
+      }
+    ],
+    "controls": [
+      {
+        "id": "15",
+        "scenario": "On one boat, there is 1 dog and on the other boat, there is 1 pig.",
+        "options": {
+          "1": "1 dog",
+          "2": "Can't decide",
+          "3": "1 pig"
+        }
+      },
+      {
+        "id": "16",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 10 people.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "10 people"
+        }
+      },
+      {
+        "id": "17",
+        "scenario": "On one boat, there is 1 person and on the other boat there are 10 plates.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "10 plates"
+        }
+      },
+      {
+        "id": "18",
+        "scenario": "On one boat, there is 1 person and on the other boat, there are 10 worms.",
+        "options": {
+          "1": "1 person",
+          "2": "Can't decide",
+          "3": "10 worms"
+        }
+      }
+    ],
+    "capacities": [
+      {
+        "id": "19",
+        "question": "How smart do you think pigs are?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "20",
+        "question": "How smart do you think dogs are?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "21",
+        "question": "How smart do you think people are?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "22",
+        "question": "To what extent do you think pigs can feel physical pain?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "23",
+        "question": "To what extent do you think dogs can feel physical pain?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "24",
+        "question": "To what extent do you think people can feel physical pain?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "25",
+        "question": "To what extent do you think pigs can feel sadness or anxiety?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "26",
+        "question": "To what extent do you think dogs can feel sadness or anxiety?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      },
+      {
+        "id": "27",
+        "question": "To what extent do you think people can feel sadness or anxiety?",
+        "options": {
+          "1": "Not at all",
+          "2": "A little bit",
+          "3": "A medium amount",
+          "4": "A lot"
+        }
+      }
+    ],
+    "control": [
+      {
+        "id": "28",
+        "question": "Which animal was NOT mentioned in this study?",
+        "options": {
+          "1": "Elephant",
+          "2": "Dog",
+          "3": "Pig"
+        }
+      }
+    ]
+  }
+}
