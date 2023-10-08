@@ -2,65 +2,37 @@ from __future__ import annotations
 
 import copy
 import json
-import os
 import random
 import time
 
-import backoff
-import matplotlib.pyplot as plt
-import openai
 import pandas as pd
-import seaborn as sns
 
-from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Dict
 
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-MODEL = "gpt-4"
+from src.types import Response, RawPrompts, Prompts, Question
+from src.models.model import Model
+from src.models.gpt import GPT
+
+MODEL_NAME = "gpt-4"
 SEED = 20
 SURVEY = "speciesism-vignette-manipulating-intelligence"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 10
 
-@dataclass
-class Response:
-  answer: str
-  id: int
-  trial_number: int
-
-@dataclass
-class RawPrompts:
-  context: str
-  statements: Dict
-
-@dataclass
-class Prompts:
-  context: str
-  statements: Dict
-
-@backoff.on_exception(backoff.expo, openai.error.RateLimitError, max_time=60)
-def ask(context, statements):
-  return openai.ChatCompletion.create(
-    model=MODEL,
-    messages=[
-      { "role": "system", "content": context },
-      { "role": "user", "content": statements },
-    ],
-    temperature=TEMPERATURE,
-  )
-
-def extract_response(response) -> str:
-  return response["choices"][0]["message"]["content"]
+MODELS = {
+  "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
+}
 
 def shuffle(arr):
   return random.sample(arr, len(arr))
 
 
-def collect_responses(prompts: Prompts) -> pd.DataFrame:
+def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
   context = prompts.context
   statements = prompts.statements
   all_responses: List[List[Response]] = []
@@ -83,8 +55,7 @@ def collect_responses(prompts: Prompts) -> pd.DataFrame:
       shuffled_statements.append(shuffled_statement)
       
     # Give LLM shuffled questions.
-    response = ask(context, str(shuffled_statements)) 
-    extracted_response = extract_response(response)
+    extracted_response = model.ask(Question(context, str(shuffled_statements)))
     print(extracted_response)
 
     # LLM responses to shuffled questions.
@@ -114,27 +85,6 @@ def collect_responses(prompts: Prompts) -> pd.DataFrame:
   )
 
   return df
-
-def plot_responses(df: pd.DataFrame):
-  plot = sns.boxplot(
-    df,
-    x="id",
-    y="answer",
-    showmeans=True,
-    medianprops={'color': 'red', 'ls': ':', 'lw': 2.5}
-  )
-  plot.set_xlabel("Statement Id")
-  plot.set_ylabel("Answer")
-  plt.savefig(f'plots/result.png', dpi=300, bbox_inches="tight")
-  plt.show()
-
-def setup(): 
-  load_dotenv()
-  openai.api_key = os.getenv("OPENAI_API_KEY")
-  sns.set_theme(font_scale=2, rc={'text.usetex' : False})
-  sns.set_style("whitegrid", {'axes.grid' : False})
-  random.seed(SEED)
-
 
 def get_prompts(folder_name: str):
   with Path(f"{folder_name}/context.txt").open("r") as f:
@@ -171,12 +121,16 @@ def save_responses(df: pd.DataFrame, *, survey: str):
     df.pivot_table(index="trial_number", columns="id", values="answer").reset_index()[
         ["trial_number"] + sorted(df['id'].unique().tolist())
       ]
-      .to_csv(f"responses/{survey}/{MODEL}/{filename}.csv", index=False)
+      .to_csv(f"responses/{survey}/{MODEL_NAME}/{filename}.csv", index=False)
   )
 
 if __name__ == '__main__':
-  setup()
+  load_dotenv()
+  random.seed(SEED)
+  model = MODELS[MODEL_NAME]
+  model.setup()
+
   raw_prompts = get_prompts(PROMPT_FOLDER_NAME)
   prompts = process_prompts(raw_prompts, PROMPT_FOLDER_NAME)
-  df = collect_responses(prompts)
+  df = collect_responses(model, prompts)
   save_responses(df, survey=SURVEY)
