@@ -1,0 +1,6 @@
+Your response should be in JSON format. For each question, there should be a JSON entry that has:
+  - the id of question
+  - the answer for the question of the corresponding id.
+If the question has an 'options' field, each answer should only be key of the options presented, not the value.
+Otherwise, answer the question using the appropriate numerical value, as a string.
+Use double quotes for strings.

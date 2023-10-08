@@ -1,0 +1,107 @@
+{
+  "questions": {
+    "assumptions-mental-capacities": [
+      {
+        "id": "1",
+        "question": "How would you rate the mental capacities of the following individuals? (By mental capacities we mean an individual's mental skills but NOT the capacity to experience pain/suffering.)",
+        "context": "A human with lower mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      },
+      {
+        "id": "2",
+        "question": "How would you rate the mental capacities of the following individuals? (By mental capacities we mean an individual's mental skills but NOT the capacity to experience pain/suffering.)",
+        "context": "A chimp with lower mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      },
+      {
+        "id": "3",
+        "question": "How would you rate the mental capacities of the following individuals? (By mental capacities we mean an individual's mental skills but NOT the capacity to experience pain/suffering.)",
+        "context": "A human with higher mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      },
+      {
+        "id": "4",
+        "question": "How would you rate the mental capacities of the following individuals? (By mental capacities we mean an individual's mental skills but NOT the capacity to experience pain/suffering.)",
+        "context": "A chimp with higher mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      }
+    ],
+    "assumptions-pain": [
+      {
+        "id": "5",
+        "question": "How would you rate the ability to experience pain of the following individuals?",
+        "context": "A human with lower mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      },
+      {
+        "id": "6",
+        "question": "How would you rate the ability to experience pain of the following individuals?",
+        "context": "A chimp with lower mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      },
+      {
+        "id": "7",
+        "question": "How would you rate the ability to experience pain of the following individuals?",
+        "context": "A human with higher mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      },
+      {
+        "id": "8",
+        "question": "How would you rate the ability to experience pain of the following individuals?",
+        "context": "A chimp with higher mental capacity",
+        "instructions": "Please use a scale from 0 (minimum) to 100 (maximum)."
+      }
+    ],
+    "saving-the-ill": [
+      {
+        "id": "9",
+        "question": "From an ethical perspective, if you can save only one of these two individuals, which one should you save?",
+        "context": "Suppose the two ill individuals are the following: A human with lower mental capacity and a chimp with lower mental capacity",
+        "instructions": "Please respond using a scale ranging from 1 (Definitely the human with lower mental capacity) to 4 (It is equally ethically right to save the one or the other) to 7 (Definitely the chimp with lower mental capacity)"
+      },
+      {
+        "id": "10",
+        "question": "From an ethical perspective, if you can save only one of these two individuals, which one should you save?",
+        "context": "Suppose the two ill individuals are the following: A human with lower mental capacity and a chimp with higher mental capacity",
+        "instructions": "Please respond using a scale ranging from 1 (Definitely the human with lower mental capacity) to 4 (It is equally ethically right to save the one or the other) to 7 (Definitely the chimp with higher mental capacity)"
+      },
+      {
+        "id": "11",
+        "question": "From an ethical perspective, if you can save only one of these two individuals, which one should you save?",
+        "context": "Suppose the two ill individuals are the following: A human with higher mental capacity and a chimp with higher mental capacity",
+        "instructions": "Please respond using a scale ranging from 1 (Definitely the human with higher mental capacity) to 4 (It is equally ethically right to save the one or the other) to 7 (Definitely the chimp with higher mental capacity)"
+      },
+      {
+        "id": "12",
+        "question": "From an ethical perspective, if you can save only one of these two individuals, which one should you save?",
+        "context": "Suppose the two ill individuals are the following: A human with higher mental capacity and a chimp with lower mental capacity",
+        "instructions": "Please respond using a scale ranging from 1 (Definitely the human with higher mental capacity) to 4 (It is equally ethically right to save the one or the other) to 7 (Definitely the chimp with lower mental capacity)"
+      },
+      {
+        "id": "13",
+        "question": "From an ethical perspective, if you can save only one of these two individuals, which one should you save?",
+        "context": "Suppose the two ill individuals are the following: A human with higher mental capacity and a human with lower mental capacity",
+        "instructions": "Please respond using a scale ranging from 1 (Definitely the human with higher mental capacity) to 4 (It is equally ethically right to save the one or the other) to 7 (Definitely the human with lower mental capacity)"
+      },
+      {
+        "id": "14",
+        "question": "From an ethical perspective, if you can save only one of these two individuals, which one should you save?",
+        "context": "Suppose the two ill individuals are the following: A chimp with higher mental capacity and a chimp with lower mental capacity",
+        "instructions": "Please respond using a scale ranging from 1 (Definitely the chimp with higher mental capacity) to 4 (It is equally ethically right to save the one or the other) to 7 (Definitely the chimp with lower mental capacity)"
+      }
+    ],
+    "control": [
+      {
+        "id": "15",
+        "question": "What was NOT covered in this study?",
+        "options": {
+          "1": "Ethical questions",
+          "2": "Moral decision making questions",
+          "3": "Chimpanzees",
+          "4": "Helping one or another being",
+          "5": "Music"
+        }
+      }
+    ]
+  }
+}

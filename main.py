@@ -21,7 +21,8 @@ from tqdm import tqdm
 
 MODEL = "gpt-4"
 SEED = 20
-SURVEY = "speciesism-prioritization-tasks"
+SURVEY = "speciesism-vignette-manipulating-intelligence"
+PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 10
 
@@ -84,6 +85,7 @@ def collect_responses(prompts: Prompts) -> pd.DataFrame:
     # Give LLM shuffled questions.
     response = ask(context, str(shuffled_statements)) 
     extracted_response = extract_response(response)
+    print(extracted_response)
 
     # LLM responses to shuffled questions.
     shuffled_responses = json.loads(extracted_response)
@@ -144,9 +146,9 @@ def get_prompts(folder_name: str):
   return RawPrompts(context, questions)
 
 
-def process_prompts(raw_prompts: RawPrompts):
+def process_prompts(raw_prompts: RawPrompts, folder_name: str):
   context = raw_prompts.context
-  with Path(f"prompts/formatting_context.txt").open("r") as f:
+  with Path(f"{folder_name}/formatting_context.txt").open("r") as f:
     context += "\n\n"
     context += f.read()
 
@@ -169,12 +171,12 @@ def save_responses(df: pd.DataFrame, *, survey: str):
     df.pivot_table(index="trial_number", columns="id", values="answer").reset_index()[
         ["trial_number"] + sorted(df['id'].unique().tolist())
       ]
-      .to_csv(f"responses/{survey}/{filename}.csv", index=False)
+      .to_csv(f"responses/{survey}/{MODEL}/{filename}.csv", index=False)
   )
 
 if __name__ == '__main__':
   setup()
-  raw_prompts = get_prompts(f"prompts/{SURVEY}/")
-  prompts = process_prompts(raw_prompts)
+  raw_prompts = get_prompts(PROMPT_FOLDER_NAME)
+  prompts = process_prompts(raw_prompts, PROMPT_FOLDER_NAME)
   df = collect_responses(prompts)
   save_responses(df, survey=SURVEY)
