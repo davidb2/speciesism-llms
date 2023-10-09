@@ -13,19 +13,21 @@ from typing import List, Dict
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-from src.types import Response, RawPrompts, Prompts, Question
+from src.custom_types import Response, RawPrompts, Prompts, Question
 from src.models.model import Model
 from src.models.gpt import GPT
+from src.models.palm import PaLM
 
-MODEL_NAME = "gpt-4"
+MODEL_NAME = "palm"
 SEED = 20
-SURVEY = "speciesism-vignette-manipulating-intelligence"
+SURVEY = "speciesism-prioritization-tasks"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 10
 
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
+  "palm": PaLM(name="models/chat-bison-001", temperature=TEMPERATURE),
 }
 
 def shuffle(arr):
