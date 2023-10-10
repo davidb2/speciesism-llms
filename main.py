@@ -13,12 +13,13 @@ from typing import List, Dict
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-from src.custom_types import Response, RawPrompts, Prompts, Question
+from src.customtypes import Response, RawPrompts, Prompts, Question
 from src.models.model import Model
 from src.models.gpt import GPT
 from src.models.palm import PaLM
+from src.models.huggingface import HuggingFace
 
-MODEL_NAME = "palm"
+MODEL_NAME = "falcon"
 SEED = 20
 SURVEY = "speciesism-prioritization-tasks"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
@@ -28,6 +29,8 @@ TRIALS = 10
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
   "palm": PaLM(name="models/chat-bison-001", temperature=TEMPERATURE),
+  "falcon": HuggingFace(name="tiiuae/falcon-7b", temperature=TEMPERATURE),
+  "longformer": HuggingFace(name="allenai/longformer-base-4096", temperature=TEMPERATURE),
 }
 
 def shuffle(arr):
@@ -57,7 +60,7 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
       shuffled_statements.append(shuffled_statement)
       
     # Give LLM shuffled questions.
-    extracted_response = model.ask(Question(context, str(shuffled_statements)))
+    extracted_response = model.ask(Question(context, str(shuffled_statements[:1])))
     print(extracted_response)
 
     # LLM responses to shuffled questions.

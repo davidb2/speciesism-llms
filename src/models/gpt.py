@@ -7,7 +7,7 @@ import backoff
 from typing import Any
 
 from .model import Model
-from ..custom_types import Question
+from ..customtypes import Question
 
 
 class GPT(Model):
