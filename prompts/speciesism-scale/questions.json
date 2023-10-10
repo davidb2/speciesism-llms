@@ -1,0 +1,86 @@
+{
+  "questions": {
+    "standard": [
+      {
+        "id": "1",
+        "statement": "Morally, animals always count for less than humans.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Somewhat disagree",
+          "4": "Neither agree nor disagree",
+          "5": "Somewhat agree",
+          "6": "Agree",
+          "7": "Strongly agree"
+        }
+      },
+      {
+        "id": "2",
+        "statement": "Humans have the right to use animals however they want to.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Somewhat disagree",
+          "4": "Neither agree nor disagree",
+          "5": "Somewhat agree",
+          "6": "Agree",
+          "7": "Strongly agree"
+        }
+      },
+      {
+        "id": "3",
+        "statement": "It is morally acceptable to keep animals in circuses for human entertainment.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Somewhat disagree",
+          "4": "Neither agree nor disagree",
+          "5": "Somewhat agree",
+          "6": "Agree",
+          "7": "Strongly agree"
+        }
+      },
+      {
+        "id": "4",
+        "statement": "It is morally acceptable to trade animals like possessions.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Somewhat disagree",
+          "4": "Neither agree nor disagree",
+          "5": "Somewhat agree",
+          "6": "Agree",
+          "7": "Strongly agree"
+        }
+      },
+      {
+        "id": "6",
+        "statement": "It is morally acceptable to perform medical experiments on animals that we would not perform on any human.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Somewhat disagree",
+          "4": "Neither agree nor disagree",
+          "5": "Somewhat agree",
+          "6": "Agree",
+          "7": "Strongly agree"
+        }
+      }
+    ],
+    "reversed": [
+      {
+        "id": "5",
+        "statement": "Chimpanzees should have basic legal rights such as a right to life or a prohibition of torture.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Somewhat disagree",
+          "4": "Neither agree nor disagree",
+          "5": "Somewhat agree",
+          "6": "Agree",
+          "7": "Strongly agree"
+        }
+      }
+    ]
+  }
+}

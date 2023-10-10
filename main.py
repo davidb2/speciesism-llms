@@ -19,9 +19,9 @@ from src.models.gpt import GPT
 from src.models.palm import PaLM
 from src.models.huggingface import HuggingFace
 
-MODEL_NAME = "falcon"
-SEED = 20
-SURVEY = "speciesism-prioritization-tasks"
+MODEL_NAME = "palm"
+SEED = None
+SURVEY = "speciesism-scale"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 10
@@ -60,7 +60,7 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
       shuffled_statements.append(shuffled_statement)
       
     # Give LLM shuffled questions.
-    extracted_response = model.ask(Question(context, str(shuffled_statements[:1])))
+    extracted_response = model.ask(Question(context, str(shuffled_statements)))
     print(extracted_response)
 
     # LLM responses to shuffled questions.
