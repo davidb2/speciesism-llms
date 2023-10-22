@@ -1,0 +1,11 @@
+Table 1
+                   A                  B  Prioritize A  Equal  Prioritize B  mean       std
+0        Human-lower   Chimpanzee-lower           0.2    0.8           0.0   3.4  1.264911
+1        Human-lower  Chimpanzee-higher           0.2    0.8           0.0   3.7  0.674949
+2       Human-higher  Chimpanzee-higher           0.3    0.7           0.0   3.4  1.074968
+3       Human-higher   Chimpanzee-lower           1.0    0.0           0.0   1.2  0.421637
+4       Human-higher        Human-lower           1.0    0.0           0.0   1.3  0.483046
+5  Chimpanzee-higher   Chimpanzee-lower           0.9    0.1           0.0   1.5  0.971825
+
+
+Note, some responses did not pass the comprehension check. Do we want to run more experiments then?
