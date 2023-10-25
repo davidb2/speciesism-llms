@@ -5,7 +5,7 @@ from typing import Set
 from dataclasses import dataclass
 
 LIKERT_MAX = 7
-MODEL = "gpt-4"
+MODEL = "palm"
 
 @dataclass
 class Stats:
