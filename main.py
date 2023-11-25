@@ -22,7 +22,7 @@ from src.models.huggingface import HuggingFace
 KIND = "survey"
 MODEL_NAME = "gpt-4"
 SEED = None
-SURVEY = "animal-attitude-scale"
+SURVEY = "animal-minds"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 10
