@@ -22,7 +22,7 @@ from src.models.huggingface import HuggingFace
 KIND = "completion"
 MODEL_NAME = "gpt-4"
 SEED = None
-SURVEY = "speciesism-completion"
+SURVEY = "speciesism-prejudices"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 5
@@ -121,7 +121,7 @@ def process_prompts(raw_prompts: RawPrompts, folder_name: str):
 
 def save_responses(df: pd.DataFrame, *, survey: str):
   # Make sure the directory exists
-  Path(f"responses/{survey}").mkdir(parents=True, exist_ok=True)
+  Path(f"responses/{survey}/{MODEL_NAME}").mkdir(parents=True, exist_ok=True)
   
   kwargs = {"aggfunc": lambda x: '<~>'.join(x)} if KIND == "completion" else {}
   # Write to table format.

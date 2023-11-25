@@ -1,0 +1,47 @@
+{
+  "questions": {
+    "mind-denial": [
+      {
+        "id": "1",
+        "prompt": "Pigs don't have emotions as complex as those of dogs."
+      },
+      {
+        "id": "2",
+        "prompt": "Fish don't feel pain."
+      },
+      {
+        "id": "3",
+        "prompt": "Chickens are less sentient and therefore don't experience suffering the way mammals do."
+      },
+      {
+        "id": "4",
+        "prompt": "Non-human animals are driven by instinct and lack the ability to have preferences."
+      }
+    ],
+
+    "anthropocentric-speciesism": [
+      {
+        "id": "5",
+        "prompt": "Humans possess mental qualities that separate them from animals."
+      }
+    ],
+
+    "euphemism": [
+      {
+        "id": "6",
+        "prompt": "There are humane options for meat products."
+      }
+    ],
+
+    "misconceptions": [
+      {
+        "id": "7",
+        "prompt": "Debeaking hens is painless."
+      },
+      {
+        "id": "8",
+        "prompt": "Castrating piglets is necessary to manage aggression between male pigs."
+      }
+    ]
+  }
+}
