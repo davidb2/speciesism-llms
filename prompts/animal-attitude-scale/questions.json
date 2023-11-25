@@ -1,0 +1,118 @@
+{
+  "questions": {
+    "standard": [
+      {
+        "id": "1",
+        "statement": "It is morally wrong to hunt wild animals just for sport.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "5",
+        "statement": "The slaughter of whales and dolphins should be immediately stopped even if it means some people will be put out of work.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "6",
+        "statement": "I sometimes get upset when I see wild animals in cages at zoos.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "9",
+        "statement": "It is unethical to breed purebred dogs for pets when millions of dogs are killed in animal shelters each year.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "10",
+        "statement": "The use of animals such as rabbits for testing the safety of cosmetics and household products is unnecessary and should be stopped.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ],
+    "reversed": [
+      {
+        "id": "2",
+        "statement": "I do not think that there is anything wrong with using animals in medical research.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "3",
+        "statement": "I think it is perfectly acceptable for cattle and hogs to be raised for human consumption.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "4",
+        "statement": "Basically, humans have the right to use animals as we see fit.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "7",
+        "statement": "Breeding animals for their skins is a legitimate use of animals.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "8",
+        "statement": "Some aspects of biology can only be learned through dissecting preserved animals such as cats.",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ]
+  }
+}

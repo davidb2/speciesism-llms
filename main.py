@@ -19,13 +19,13 @@ from src.models.gpt import GPT
 from src.models.palm import PaLM
 from src.models.huggingface import HuggingFace
 
-KIND = "completion"
+KIND = "survey"
 MODEL_NAME = "gpt-4"
 SEED = None
-SURVEY = "speciesism-prejudices"
+SURVEY = "animal-attitude-scale"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
-TRIALS = 5
+TRIALS = 10
 
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
