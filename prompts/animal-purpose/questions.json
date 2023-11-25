@@ -1,0 +1,619 @@
+{
+  "questions": {
+    "medical research": [
+      {
+        "id": "1",
+        "statement": "To what extent do you agree with the use of a CHICKEN for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "2",
+        "statement": "To what extent do you agree with the use of a CHIMPANZEE for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "3",
+        "statement": "To what extent do you agree with the use of a DOG for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "4",
+        "statement": "To what extent do you agree with the use of a DOLPHIN for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "5",
+        "statement": "To what extent do you agree with the use of a FISH for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "6",
+        "statement": "To what extent do you agree with the use of a FROG for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "7",
+        "statement": "To what extent do you agree with the use of a PARROT for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "8",
+        "statement": "To what extent do you agree with the use of a PIGEON for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "9",
+        "statement": "To what extent do you agree with the use of a RABBIT for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "10",
+        "statement": "To what extent do you agree with the use of a RAT for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "11",
+        "statement": "To what extent do you agree with the use of a SNAKE for medical research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ],
+    "basic science research": [
+      {
+        "id": "12",
+        "statement": "To what extent do you agree with the use of a CHICKEN for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "13",
+        "statement": "To what extent do you agree with the use of a CHIMPANZEE for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "14",
+        "statement": "To what extent do you agree with the use of a DOG for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "15",
+        "statement": "To what extent do you agree with the use of a DOLPHIN for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "16",
+        "statement": "To what extent do you agree with the use of a FISH for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "17",
+        "statement": "To what extent do you agree with the use of a FROG for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "18",
+        "statement": "To what extent do you agree with the use of a PARROT for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "19",
+        "statement": "To what extent do you agree with the use of a PIGEON for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "20",
+        "statement": "To what extent do you agree with the use of a RABBIT for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "21",
+        "statement": "To what extent do you agree with the use of a RAT for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "22",
+        "statement": "To what extent do you agree with the use of a SNAKE for basic science research?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ],
+    "food production": [
+      {
+        "id": "23",
+        "statement": "To what extent do you agree with the use of a CHICKEN for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "24",
+        "statement": "To what extent do you agree with the use of a CHIMPANZEE for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "25",
+        "statement": "To what extent do you agree with the use of a DOG for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "26",
+        "statement": "To what extent do you agree with the use of a DOLPHIN for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "27",
+        "statement": "To what extent do you agree with the use of a FISH for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "28",
+        "statement": "To what extent do you agree with the use of a FROG for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "29",
+        "statement": "To what extent do you agree with the use of a PARROT for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "30",
+        "statement": "To what extent do you agree with the use of a PIGEON for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "31",
+        "statement": "To what extent do you agree with the use of a RABBIT for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "32",
+        "statement": "To what extent do you agree with the use of a RAT for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "33",
+        "statement": "To what extent do you agree with the use of a SNAKE for food production?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ],
+    "pest control": [
+      {
+        "id": "34",
+        "statement": "To what extent do you agree with the use of a CHICKEN for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "35",
+        "statement": "To what extent do you agree with the use of a CHIMPANZEE for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "36",
+        "statement": "To what extent do you agree with the use of a DOG for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "37",
+        "statement": "To what extent do you agree with the use of a DOLPHIN for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "38",
+        "statement": "To what extent do you agree with the use of a FISH for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "39",
+        "statement": "To what extent do you agree with the use of a FROG for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "40",
+        "statement": "To what extent do you agree with the use of a PARROT for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "41",
+        "statement": "To what extent do you agree with the use of a PIGEON for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "42",
+        "statement": "To what extent do you agree with the use of a RABBIT for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "43",
+        "statement": "To what extent do you agree with the use of a RAT for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "44",
+        "statement": "To what extent do you agree with the use of a SNAKE for pest control?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ],
+    "other": [
+      {
+        "id": "45",
+        "statement": "To what extent do you agree with the use of a CHICKEN for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "46",
+        "statement": "To what extent do you agree with the use of a CHIMPANZEE for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "47",
+        "statement": "To what extent do you agree with the use of a DOG for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "48",
+        "statement": "To what extent do you agree with the use of a DOLPHIN for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "49",
+        "statement": "To what extent do you agree with the use of a FISH for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "50",
+        "statement": "To what extent do you agree with the use of a FROG for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "51",
+        "statement": "To what extent do you agree with the use of a PARROT for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "52",
+        "statement": "To what extent do you agree with the use of a PIGEON for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "53",
+        "statement": "To what extent do you agree with the use of a RABBIT for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "54",
+        "statement": "To what extent do you agree with the use of a RAT for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      },
+      {
+        "id": "55",
+        "statement": "To what extent do you agree with the use of a SNAKE for other?",
+        "options": {
+          "1": "Strongly disagree",
+          "2": "Disagree",
+          "3": "Undecided",
+          "4": "Agree",
+          "5": "Strongly agree"
+        }
+      }
+    ]
+  }
+}
