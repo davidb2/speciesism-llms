@@ -1,0 +1,84 @@
+{
+  "questions": {
+    "killing": [
+      {
+        "id": "1",
+        "prompt": "Killing a pig "
+      },
+      {
+        "id": "2",
+        "prompt": "Killing a cow "
+      },
+      {
+        "id": "3",
+        "prompt": "Killing a chicken "
+      },
+      {
+        "id": "4",
+        "prompt": "Killing a dog "
+      },
+      {
+        "id": "5",
+        "prompt": "Killing a cat "
+      },
+      {
+        "id": "6",
+        "prompt": "Killing a dolphin "
+      }
+    ],
+
+    "processing": [
+      {
+        "id": "7",
+        "prompt": "Processing a pig "
+      },
+      {
+        "id": "8",
+        "prompt": "Processing a cow "
+      },
+      {
+        "id": "9",
+        "prompt": "Processing a chicken "
+      },
+      {
+        "id": "10",
+        "prompt": "Processing a dog "
+      },
+      {
+        "id": "11",
+        "prompt": "Processing a cat "
+      },
+      {
+        "id": "12",
+        "prompt": "Processing a dolphin "
+      }
+    ],
+
+    "eating": [
+      {
+        "id": "13",
+        "prompt": "Eating a pig "
+      },
+      {
+        "id": "14",
+        "prompt": "Eating a cow "
+      },
+      {
+        "id": "15",
+        "prompt": "Eating a chicken "
+      },
+      {
+        "id": "16",
+        "prompt": "Eating a dog "
+      },
+      {
+        "id": "17",
+        "prompt": "Eating a cat "
+      },
+      {
+        "id": "18",
+        "prompt": "Eating a dolphin "
+      }
+    ]
+  }
+}

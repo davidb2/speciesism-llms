@@ -1,0 +1,4 @@
+Your response should be in proper JSON format. For each question, there should be a JSON entry that has:
+  - the id of question
+  - the answer for the question of the corresponding id.
+Use double quotes for strings.

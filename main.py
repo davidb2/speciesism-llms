@@ -19,12 +19,13 @@ from src.models.gpt import GPT
 from src.models.palm import PaLM
 from src.models.huggingface import HuggingFace
 
-MODEL_NAME = "palm"
+KIND = "completion"
+MODEL_NAME = "gpt-4"
 SEED = None
-SURVEY = "speciesism-scale"
+SURVEY = "speciesism-completion"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
-TRIALS = 10
+TRIALS = 5
 
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
@@ -36,6 +37,9 @@ MODELS = {
 def shuffle(arr):
   return random.sample(arr, len(arr))
 
+def export_answer(answer: str):
+  if KIND == "survey": return int(answer)
+  return answer
 
 def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
   context = prompts.context
@@ -82,7 +86,7 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
 
   df = pd.DataFrame(
     data=[
-      (response.id, int(response.answer), response.trial_number)
+      (response.id, export_answer(response.answer), response.trial_number)
       for responses in all_responses
       for response in responses
     ],
@@ -119,21 +123,29 @@ def save_responses(df: pd.DataFrame, *, survey: str):
   # Make sure the directory exists
   Path(f"responses/{survey}").mkdir(parents=True, exist_ok=True)
   
+  kwargs = {"aggfunc": lambda x: '<~>'.join(x)} if KIND == "completion" else {}
   # Write to table format.
   filename = time.strftime("%Y%m%d-%H%M%S")
 
   (
-    df.pivot_table(index="trial_number", columns="id", values="answer").reset_index()[
+    df.pivot_table(index="trial_number", columns="id", values="answer", **kwargs).reset_index()[
         ["trial_number"] + sorted(df['id'].unique().tolist())
       ]
       .to_csv(f"responses/{survey}/{MODEL_NAME}/{filename}.csv", index=False)
   )
 
-if __name__ == '__main__':
+def setup():
   load_dotenv()
   random.seed(SEED)
+
+def get_model():
   model = MODELS[MODEL_NAME]
   model.setup()
+  return model
+
+if __name__ == '__main__':
+  setup()
+  model = get_model() 
 
   raw_prompts = get_prompts(PROMPT_FOLDER_NAME)
   prompts = process_prompts(raw_prompts, PROMPT_FOLDER_NAME)
