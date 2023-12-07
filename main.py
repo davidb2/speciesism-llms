@@ -26,17 +26,18 @@ from src.customlogger import logger
 JSON_PATTERN = regex.compile(r'\{(?:[^{}]|(?R))*\}')
 JSON_KEY_VALUE_PATTERN = regex.compile('"([a-zA-Z0-9]+)"\s*:\s*(".*"|\[.*\]|\{.*\})') 
 
-BATCHED = True # None
+BATCHED = True 
 KIND = "completion"
-MODEL_NAME = "palm"
+MODEL_NAME = "gpt-3.5-turbo"
 SEED = None
-SURVEY = "speciesism-prejudices"
+SURVEY = "speciesism-completion"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 5
 
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
+  "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
   "palm": PaLM(name="models/chat-bison-001", temperature=TEMPERATURE),
   "falcon": HuggingFace(name="tiiuae/falcon-7b", temperature=TEMPERATURE),
   "longformer": HuggingFace(name="allenai/longformer-base-4096", temperature=TEMPERATURE),
