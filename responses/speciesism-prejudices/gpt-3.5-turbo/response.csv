@@ -1,0 +1,8 @@
+trial_number,1,2,3,4,5,6
+1,,,False,false,,
+2,False,,,false,True,
+3,,False,"{
+  ""2"": ""This statement is not accurate. Chickens are sentient animals and are capable of experiencing suffering, just like mammals."",
+}",,,true
+4,False,False,,,,
+5,False,,,,,true
