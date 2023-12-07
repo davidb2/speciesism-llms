@@ -28,9 +28,10 @@ JSON_KEY_VALUE_PATTERN = regex.compile('"([a-zA-Z0-9]+)"\s*:\s*(".*"|\[.*\]|\{.*
 
 BATCHED = True 
 KIND = "completion"
-MODEL_NAME = "gpt-3.5-turbo"
+MODEL_NAME = "gpt-3.5-turbo-instruct"
+SPECIFY_FORMATTING = False
 SEED = None
-SURVEY = "speciesism-completion"
+SURVEY = "speciesism-prejudices"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
 TRIALS = 5
@@ -38,6 +39,7 @@ TRIALS = 5
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
   "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
+  "gpt-3.5-turbo-instruct": GPT(name="gpt-3.5-turbo-instruct", temperature=TEMPERATURE, chat=False),
   "palm": PaLM(name="models/chat-bison-001", temperature=TEMPERATURE),
   "falcon": HuggingFace(name="tiiuae/falcon-7b", temperature=TEMPERATURE),
   "longformer": HuggingFace(name="allenai/longformer-base-4096", temperature=TEMPERATURE),
@@ -89,17 +91,17 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
       
     # Give LLM shuffled questions.
     shuffled_responses: List[Dict] = []
-    for batched_shuffled_statements in batched(shuffled_statements, n=int(BATCHED) or None):
+    for batched_shuffled_statements in batched(shuffled_statements, n=int(BATCHED) or None, singletons=False):
       batched_shuffled_responses = None
       while batched_shuffled_responses is None:
         extracted_response = None
         while extracted_response is None:
           logger.info(batched_shuffled_statements)
-          extracted_response = model.ask(Question(context, str(batched_shuffled_statements)))
+          extracted_response = model.ask(Question(context, str(batched_shuffled_statements if SPECIFY_FORMATTING else batched_shuffled_statements["prompt"])))
           logger.info(extracted_response)
 
         # LLM responses to shuffled questions.
-        for parse_fn in (json_extractor, partial(raw_extractor, batched_shuffled_statements[0]["id"])): # dict_extractor):
+        for parse_fn in (json_extractor, partial(raw_extractor, batched_shuffled_statements["id"])): # dict_extractor):
           try:
             batched_shuffled_responses = parse_fn(extracted_response)
             break
@@ -152,9 +154,11 @@ def get_prompts(folder_name: str):
 
 def process_prompts(raw_prompts: RawPrompts, folder_name: str):
   context = raw_prompts.context
-  with Path(f"{folder_name}/formatting_context.txt").open("r") as f:
-    context += "\n\n"
-    context += f.read()
+
+  if SPECIFY_FORMATTING:
+    with Path(f"{folder_name}/formatting_context.txt").open("r") as f:
+      context += "\n\n"
+      context += f.read()
 
   raw_statements = raw_prompts.statements
   statements: List[Dict] = []

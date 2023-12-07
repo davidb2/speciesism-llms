@@ -1,0 +1,178 @@
+trial_number,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+1,"
+
+{'id': '6', 'answer': 'is a controversial action due","
+
+{'2' : 'is considered wrong in some cultures.',}","
+
+[{""id"": ""7"", ""answer"": ""results in its death","
+
+
+
+[{'id': '3', 'answer': 'is illegal and considered","
+[{'id': '12', 'answer': 'is considered a cruel","
+
+{'id': '15', 'answer': 'is illegal in most countries","
+
+[{'id': '4', 'answer': 'Processing a pig involves","
+{""13"": ""Processing a cow involves the slaughter, butchering,","
+
+[{""id"": ""16"", ""answer"": ""cleaning and preparing","
+[{'id': '18', 'answer': 'To process a dog","
+
+[{""id"": ""11"", ""answer"": ""To process a cat","
+
+[{'id': '5', 'answer': 'Processing a dolphin involves","
+
+[{'id': '1', 'answer': 'is not considered ethical","
+
+[{'id': '10', 'answer': 'is a common practice","
+[{'id': '8', 'answer': 'usually refers to consuming","
+
+[{'id': '9', 'answer': 'is culturally acceptable in","
+
+Response: [{'id': '17', 'answer': 'is not a","
+
+[{'id': '14', 'answer': ""should be banned as"
+2,"
+{'id': '10', 'answer': 'is not acceptable and is","
+
+[{'id': '7', 'answer': 'is often considered unethical","
+
+[{""id"": ""12"", ""answer"": ""Killing a chicken","
+
+[{'id': '14', 'answer': 'is cruel and unethical","
+
+[{'id': '18', 'answer': 'is illegal and cruel","
+
+[{""id"": ""9"", ""answer"": ""is a cruel and","
+
+[{'id': '3', 'answer': 'Processing a pig involves","
+
+[{""id"": ""6"", ""answer"": ""Processing a cow involves","
+
+[{'id': '15', 'answer': 'Cleaning and preparing a","
+
+[{'id': '17', 'answer': 'Processing a dog refers","
+
+[{'id': '4', 'answer': 'To process a cat","
+
+{'id': '13', 'answer': 'Processing a dolphin involves a","
+
+[{'id': '1', 'answer': 'is considered to be","
+
+[{'id': '2', 'answer': 'is a common practice","
+
+[{'id': '16', 'answer': ""can provide various nutrients","
+
+[{'id': '11', 'answer': 'is not considered ethical","
+[{""id"": ""5"", ""answer"": ""is not a common","
+
+[{""id"": ""8"", ""answer"": ""is illegal in most"
+3,"
+
+{'id': '12', 'answer': 'can result in the production","
+
+{'id': '4', 'answer': 'is considered a sin in","
+
+[{'id': '5', 'answer': 'could provide sustenance","
+
+[{'id': '2', 'answer': 'is morally wrong and","
+
+{'id': '9', 'answer': 'is not morally justifiable","
+[{'id': '7', 'answer': 'is illegal in many","
+
+[{""id"": ""13"", ""answer"": ""Processing a pig refers","
+
+{'17': 'Processing a cow'}","
+
+{'id': '8', 'answer': 'Processing a chicken involves sla","
+
+[{'id': '6', 'answer': 'Processing a dog includes"," 
+
+[{""id"": ""1"", ""answer"": ""Feeding it,","
+
+[{'id': '15', 'answer': 'Processing a dolphin involves","
+[
+  {
+    ""id"": ""14"",
+    ""answer"": ""","
+
+[{'id': '16', 'answer': 'is a common practice","
+
+{'id': '10', 'answer': 'involves using utens","
+
+[{""id"": ""18"", ""answer"": ""can be considered socially","
+
+[{""id"": ""3"", ""answer"": ""is considered taboo in","
+
+{
+  ""id"": ""11"",
+  ""answer"": ""is considered"
+4,"
+[{'id': '9', 'answer': 'is necessary for survival","
+
+{""id"": ""16"", ""answer"": ""is considered a sin in","
+
+{'7': 'is a common method of preparing poultry for consumption.'}","
+[{'id': '13', 'answer': 'is a criminal offense","
+
+
+
+[{'id': 10, 'answer': 'is an act","
+[{""id"": ""3"", ""answer"": ""is illegal in most","
+{'id': '11', 'answer': 'Processing a pig can involve","
+[{'id': '4', 'answer': 'Processing a cow involves","
+[{'id': '1', 'answer': 'Properly washing","
+
+[{'id': '12', 'answer': 'To process a dog","
+[{'id': '15', 'answer': 'To process a cat","
+
+[{'id': '17', 'answer': 'Processing a dolphin involves","
+{'id': '8', 'answer': 'is a common practice in","
+
+[{'id': '2', 'answer': 'Eating a cow","
+{'id': '5', 'answer': 'can provide essential nutrients such","
+[{'id': '14', 'prompt': 'Eating a dog","
+
+{'id': '6', 'answer': 'is not recommended as it","
+
+[{'id':'18', 'answer': 'is considered unethical and illegal"
+5,"
+
+
+
+
+
+[{'id': '4', 'answer': 'involves","
+
+[{'id': '14', 'answer': 'is considered taboo and","
+
+[{'id': '1', 'answer': 'may be necessary for","
+[{""id"": ""8"", ""answer"": ""is wrong and should","'[{'id': '3', 'answer': 'is illegal and cruel behavior","
+
+[{'id': '15', 'answer': 'is a cruel and","
+
+[{'id': '11', 'answer': 'Processing a pig typically","
+
+[{""id"": ""12"", ""answer"": ""Removing the skin and","
+
+[{'id': '16', 'answer': ' involves removing the feathers","
+
+[{'id': '7', 'answer': 'To process a dog","
+
+[{'id': '2', 'answer': 'To process a cat","
+
+[{'id': '10', 'answer': 'Processing a dolphin involves","
+
+[{'id': '5', 'prompt': 'Eating a pig","
+
+[{""id"": ""18"", ""answer"": ""is considered taboo in","
+
+[{'id': '9', 'answer': 'involves using","
+
+[{""id"": ""13"", ""answer"": ""can be considered culturally","
+
+{'id': '6', 'answer': 'is not considered ethical or","
+
+[{'id': '17', 'answer': 'is illegal in many"
