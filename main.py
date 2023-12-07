@@ -3,10 +3,12 @@ from __future__ import annotations
 import copy
 import json
 import random
+import regex
 import time
 
 import pandas as pd
 
+from functools import partial
 from pathlib import Path
 from typing import List, Dict
 
@@ -18,14 +20,20 @@ from src.models.model import Model
 from src.models.gpt import GPT
 from src.models.palm import PaLM
 from src.models.huggingface import HuggingFace
+from src.utils import batched
+from src.customlogger import logger
 
-KIND = "survey"
-MODEL_NAME = "gpt-4"
+JSON_PATTERN = regex.compile(r'\{(?:[^{}]|(?R))*\}')
+JSON_KEY_VALUE_PATTERN = regex.compile('"([a-zA-Z0-9]+)"\s*:\s*(".*"|\[.*\]|\{.*\})') 
+
+BATCHED = True # None
+KIND = "completion"
+MODEL_NAME = "palm"
 SEED = None
-SURVEY = "animal-minds"
+SURVEY = "speciesism-completion"
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 TEMPERATURE = 1
-TRIALS = 10
+TRIALS = 5
 
 MODELS = {
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
@@ -33,6 +41,21 @@ MODELS = {
   "falcon": HuggingFace(name="tiiuae/falcon-7b", temperature=TEMPERATURE),
   "longformer": HuggingFace(name="allenai/longformer-base-4096", temperature=TEMPERATURE),
 }
+
+def json_extractor(string):
+  jsons = JSON_PATTERN.findall(string)
+  logger.info(jsons)
+  return json.loads(jsons[0], strict=False)
+
+def dict_extractor(string):
+  return dict(JSON_KEY_VALUE_PATTERN.findall(string))
+
+def raw_extractor(id, string):
+  return {
+    "id": id,
+    "answer": string,
+  }
+
 
 def shuffle(arr):
   return random.sample(arr, len(arr))
@@ -64,23 +87,43 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
       shuffled_statements.append(shuffled_statement)
       
     # Give LLM shuffled questions.
-    extracted_response = model.ask(Question(context, str(shuffled_statements)))
-    print(extracted_response)
+    shuffled_responses: List[Dict] = []
+    for batched_shuffled_statements in batched(shuffled_statements, n=int(BATCHED) or None):
+      batched_shuffled_responses = None
+      while batched_shuffled_responses is None:
+        extracted_response = None
+        while extracted_response is None:
+          logger.info(batched_shuffled_statements)
+          extracted_response = model.ask(Question(context, str(batched_shuffled_statements)))
+          logger.info(extracted_response)
 
-    # LLM responses to shuffled questions.
-    shuffled_responses = json.loads(extracted_response)
-    print(shuffled_responses)
+        # LLM responses to shuffled questions.
+        for parse_fn in (json_extractor, partial(raw_extractor, batched_shuffled_statements[0]["id"])): # dict_extractor):
+          try:
+            batched_shuffled_responses = parse_fn(extracted_response)
+            break
+          except Exception as e:
+            logger.error(e)
+
+      logger.info(batched_shuffled_responses)
+      if BATCHED:
+        if "answer" not in batched_shuffled_responses: 
+          batched_shuffled_responses = None
+          continue
+        shuffled_responses.append(batched_shuffled_responses)
+      else:
+        shuffled_responses = batched_shuffled_responses
 
     # Unshuffle questions and check ids.
     responses: List[Response] = []
     ids_not_seen = set(map(str, range(1, len(statements)+1)))
     for shuffled_response in shuffled_responses:
       response = copy.deepcopy(shuffled_response)
-      response["id"] = shuffled_id_to_original_id[response["id"]]
+      response["id"] = shuffled_id_to_original_id[str(response["id"])]
       ids_not_seen.remove(response["id"])
       responses.append(Response(answer=response["answer"], id=int(response["id"]), trial_number=trial_number))
 
-    print(responses)
+    logger.info(responses)
     all_responses.append(responses)
 
 
@@ -92,6 +135,7 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
     ],
     columns=["id", "answer", "trial_number"],
   )
+  logger.info(df)
 
   return df
 
@@ -122,16 +166,18 @@ def process_prompts(raw_prompts: RawPrompts, folder_name: str):
 def save_responses(df: pd.DataFrame, *, survey: str):
   # Make sure the directory exists
   Path(f"responses/{survey}/{MODEL_NAME}").mkdir(parents=True, exist_ok=True)
-  
-  kwargs = {"aggfunc": lambda x: '<~>'.join(x)} if KIND == "completion" else {}
-  # Write to table format.
   filename = time.strftime("%Y%m%d-%H%M%S")
+  full_file = f"responses/{survey}/{MODEL_NAME}/{filename}"
+  df.to_pickle(path=f"{full_file}.pkl")
+
+  # kwargs = {"aggfunc": lambda x: '<~>'.join(x)} if KIND == "completion" else {}
+  # Write to table format.
 
   (
-    df.pivot_table(index="trial_number", columns="id", values="answer", **kwargs).reset_index()[
+    df.pivot(index="trial_number", columns="id", values="answer").reset_index()[
         ["trial_number"] + sorted(df['id'].unique().tolist())
       ]
-      .to_csv(f"responses/{survey}/{MODEL_NAME}/{filename}.csv", index=False)
+      .to_csv(f"{full_file}.csv", index=False)
   )
 
 def setup():
