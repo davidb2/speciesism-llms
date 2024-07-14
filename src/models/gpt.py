@@ -8,6 +8,7 @@ from typing import Any
 
 from .model import Model
 from ..customtypes import Question
+from ..customlogger import logger
 
 
 class GPT(Model):
@@ -28,6 +29,7 @@ class GPT(Model):
     prompt = f"Context: {question.context}\nPrompt: {question.statements}"
     kwargs = {"messages": messages} if self.chat else {"prompt": prompt, "max_tokens": 4000}
 
+    logger.info(prompt)
     return endpoint.create(
       model=self.name,
       temperature=self.temperature,

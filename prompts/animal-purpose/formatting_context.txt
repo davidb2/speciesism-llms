@@ -4,8 +4,8 @@ Your response should be in proper JSON format. For each question, there should b
 For example, the response should have the format: 
 
 [
-  {"id": "1", "answer": "0"},
-  {"id": "2", "answer": "6"},
+  {"id": "1", "answer": "3"},
+  {"id": "2", "answer": "5"},
   ...
 ]
 

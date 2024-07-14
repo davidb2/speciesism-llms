@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import random
 import regex
 import time
@@ -23,20 +24,25 @@ from src.models.huggingface import HuggingFace
 from src.utils import batched
 from src.customlogger import logger
 
-JSON_PATTERN = regex.compile(r'\{(?:[^{}]|(?R))*\}')
-JSON_KEY_VALUE_PATTERN = regex.compile('"([a-zA-Z0-9]+)"\s*:\s*(".*"|\[.*\]|\{.*\})') 
+load_dotenv()
 
-BATCHED = True 
-KIND = "completion"
-MODEL_NAME = "gpt-3.5-turbo-instruct"
-SPECIFY_FORMATTING = False
-SEED = None
-SURVEY = "speciesism-prejudices"
+JSON_PATTERN = regex.compile(r'\{(?:[^{}]|(?R))*\}')
+JSON_KEY_VALUE_PATTERN = regex.compile('"([a-zA-Z0-9]+)"\s*:\s*(".*"|\[.*\]|\{.*\})')
+
+BATCHED = str(os.getenv("BATCHED", default=False)).lower() == 'true'
+KIND = os.getenv("KIND", default="completion")
+MODEL_NAME = os.environ["MODEL_NAME"]
+SPECIFY_FORMATTING = str(os.getenv("SPECIFY_FORMATTING", default=False)).lower() == 'true'
+SEED = int(_seed) if (_seed := os.getenv("SEED", default=None)) else None
+SURVEY = os.environ["SURVEY"]
+TEMPERATURE = float(os.environ["TEMPERATURE"])
+TRIALS = int(os.environ["TRIALS"])
+
 PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
-TEMPERATURE = 1
-TRIALS = 5
+
 
 MODELS = {
+  "gpt-4o": GPT(name="gpt-4o", temperature=TEMPERATURE),
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
   "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
   "gpt-3.5-turbo-instruct": GPT(name="gpt-3.5-turbo-instruct", temperature=TEMPERATURE, chat=False),
@@ -64,7 +70,12 @@ def shuffle(arr):
   return random.sample(arr, len(arr))
 
 def export_answer(answer: str):
-  if KIND == "survey": return int(answer)
+  if KIND == "survey":
+    try:
+      return int(answer)
+    except:
+      logger.error(f"could not convert {answer} to int")
+      return answer
   return answer
 
 def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
@@ -88,7 +99,7 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
       shuffled_statement = copy.deepcopy(statement)
       shuffled_statement["id"] = f"{idx}"
       shuffled_statements.append(shuffled_statement)
-      
+
     # Give LLM shuffled questions.
     shuffled_responses: List[Dict] = []
     for batched_shuffled_statements in batched(shuffled_statements, n=int(BATCHED) or None, singletons=False):
@@ -110,7 +121,7 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
 
       logger.info(batched_shuffled_responses)
       if BATCHED:
-        if "answer" not in batched_shuffled_responses: 
+        if "answer" not in batched_shuffled_responses:
           batched_shuffled_responses = None
           continue
         shuffled_responses.append(batched_shuffled_responses)
@@ -186,7 +197,6 @@ def save_responses(df: pd.DataFrame, *, survey: str):
   )
 
 def setup():
-  load_dotenv()
   random.seed(SEED)
 
 def get_model():
@@ -196,7 +206,7 @@ def get_model():
 
 if __name__ == '__main__':
   setup()
-  model = get_model() 
+  model = get_model()
 
   raw_prompts = get_prompts(PROMPT_FOLDER_NAME)
   prompts = process_prompts(raw_prompts, PROMPT_FOLDER_NAME)
