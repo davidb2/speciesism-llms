@@ -4,3 +4,7 @@ Your response should be in JSON format. For each question, there should be a JSO
 If the question has an 'options' field, each answer should only be key of the options presented, not the value.
 Otherwise, answer the question using the appropriate numerical value, as a string.
 Use double quotes for strings.
+
+Using this JSON schema:
+  Response = {"id": str, "answer": str}
+Return a `Response`

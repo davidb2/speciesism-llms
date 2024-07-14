@@ -21,6 +21,7 @@ from src.models.model import Model
 from src.models.gpt import GPT
 from src.models.palm import PaLM
 from src.models.huggingface import HuggingFace
+from src.models.gemini import Gemini
 from src.utils import batched
 from src.customlogger import logger
 
@@ -42,6 +43,7 @@ PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 
 
 MODELS = {
+  "gemini-1.5-pro": Gemini(name="gemini-1.5-pro", temperature=TEMPERATURE),
   "gpt-4o": GPT(name="gpt-4o", temperature=TEMPERATURE),
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
   "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
