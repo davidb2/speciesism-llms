@@ -10,3 +10,6 @@ For example, the response should have the format:
 ]
 
 Each answer should only be key of the options presented, not the value. Use double quotes for strings.
+It is also very important that the answer be a single number. No words.
+If you are undecided, you can choose the 'Undecided' option.
+I will collect these responses into a csv file, so it is very important all of the values in the "answer" field are parsable numbers.
