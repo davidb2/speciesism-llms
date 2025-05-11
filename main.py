@@ -19,10 +19,9 @@ from tqdm import tqdm
 from src.customtypes import Response, RawPrompts, Prompts, Question
 from src.models.model import Model
 from src.models.gpt import GPT
-from src.models.palm import PaLM
-from src.models.huggingface import HuggingFace
 from src.models.gemini import Gemini
 from src.models.claude import Claude
+from src.models.grok import Grok
 from src.utils import batched
 from src.customlogger import logger
 
@@ -36,6 +35,7 @@ KIND = os.getenv("KIND", default="completion")
 MODEL_NAME = os.environ["MODEL_NAME"]
 SPECIFY_FORMATTING = str(os.getenv("SPECIFY_FORMATTING", default=False)).lower() == 'true'
 SEED = int(_seed) if (_seed := os.getenv("SEED", default=None)) else None
+SHUFFLE = str(os.getenv("SHUFFLE", default=True)).lower() == 'true'
 SURVEY = os.environ["SURVEY"]
 TEMPERATURE = float(os.environ["TEMPERATURE"])
 TRIALS = int(os.environ["TRIALS"])
@@ -49,10 +49,8 @@ MODELS = {
   "gpt-4o": GPT(name="gpt-4o", temperature=TEMPERATURE),
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
   "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
-  "gpt-3.5-turbo-instruct": GPT(name="gpt-3.5-turbo-instruct", temperature=TEMPERATURE, chat=False),
-  "palm": PaLM(name="models/chat-bison-001", temperature=TEMPERATURE),
-  "falcon": HuggingFace(name="tiiuae/falcon-7b", temperature=TEMPERATURE),
-  "longformer": HuggingFace(name="allenai/longformer-base-4096", temperature=TEMPERATURE),
+  "gpt-3.5-turbo-instruct": GPT(name="gpt-3.5-turbo-instruct", temperature=TEMPERATURE),
+  "grok-3": Grok(name="grok-3", temperature=TEMPERATURE),
 }
 
 def json_extractor(string):
@@ -71,7 +69,7 @@ def raw_extractor(id, string):
 
 
 def shuffle(arr):
-  return random.sample(arr, len(arr))
+  return random.sample(arr, len(arr)) if SHUFFLE else arr
 
 def export_answer(answer: str):
   if KIND == "survey":

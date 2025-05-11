@@ -7,4 +7,4 @@ Use double quotes for strings.
 
 Using this JSON schema:
   Response = {"id": str, "answer": str}
-Return a `Response`
+Return a `Response` or an array of `Response`s if an array of questions are given to you.
