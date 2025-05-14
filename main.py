@@ -26,6 +26,7 @@ from src.models.gemini import Gemini
 from src.models.claude import Claude
 from src.models.grok import Grok
 from src.models.deepseek import Deepseek
+from src.models.fireworks import Fireworks
 from src.utils import batched
 from src.customlogger import logger
 
@@ -56,6 +57,7 @@ MODELS = {
   "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
   "gpt-3.5-turbo-instruct": GPT(name="gpt-3.5-turbo-instruct", temperature=TEMPERATURE),
   "grok-3": Grok(name="grok-3", temperature=TEMPERATURE),
+  "llama-4-maverick": Fireworks(name="accounts/fireworks/models/llama4-maverick-instruct-basic", temperature=TEMPERATURE),
 }
 
 def json_extractor(string):
@@ -112,16 +114,19 @@ def ask_one_batch(one_batch: OneBatch) -> List[Dict]:
         break
       except Exception as e:
         logger.error(e)
+    
+    if batched_shuffled_responses is None:
+      continue
 
-  logger.info(batched_shuffled_responses)
-  if BATCHED:
-    if "answer" not in batched_shuffled_responses:
-      batched_shuffled_responses = None
-      return None
-    # shuffled_responses.append(batched_shuffled_responses)
-    return [batched_shuffled_responses]
-  else:
-    return batched_shuffled_responses
+    logger.info(batched_shuffled_responses)
+    if BATCHED:
+      if "answer" not in batched_shuffled_responses:
+        batched_shuffled_responses = None
+        continue
+      # shuffled_responses.append(batched_shuffled_responses)
+      return [batched_shuffled_responses]
+    else:
+      return batched_shuffled_responses
 
 def ask_all_questions(model: Model, prompts: Prompts, trial_number: int) -> List[Dict]:
   # Keep trying until we get a valid response.
