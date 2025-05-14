@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import itertools
 import json
 import os
 import random
@@ -9,9 +10,11 @@ import time
 
 import pandas as pd
 
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 from functools import partial
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from dotenv import load_dotenv
 from tqdm import tqdm
@@ -22,6 +25,7 @@ from src.models.gpt import GPT
 from src.models.gemini import Gemini
 from src.models.claude import Claude
 from src.models.grok import Grok
+from src.models.deepseek import Deepseek
 from src.utils import batched
 from src.customlogger import logger
 
@@ -45,6 +49,7 @@ PROMPT_FOLDER_NAME = f"prompts/{SURVEY}/"
 
 MODELS = {
   "claude-3.5-sonnet": Claude(name="claude-3-5-sonnet-20240620", temperature=TEMPERATURE),
+  "deepseek-r1": Deepseek(name="deepseek-reasoner", temperature=TEMPERATURE),
   "gemini-1.5-pro": Gemini(name="gemini-1.5-pro", temperature=TEMPERATURE),
   "gpt-4o": GPT(name="gpt-4o", temperature=TEMPERATURE),
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
@@ -80,17 +85,49 @@ def export_answer(answer: str):
       return answer
   return answer
 
-def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
-  context = prompts.context
-  statements = prompts.statements
-  all_responses: List[List[Response]] = []
+@dataclass
+class OneBatch:
+  model: Model
+  batched_shuffled_statements: Tuple[Dict, ...]
+  context: str
 
-  # TODO: make this loop resilient to LLM format errors while making sure
-  # it does not use up LLM quota. Currently one little error would ruin the entire experiment,
-  # which could mean a couple of minutes went to waste.
-  for trial_number in tqdm(range(1, TRIALS+1), desc="trial"):
+def ask_one_batch(one_batch: OneBatch) -> List[Dict]:
+  model, batched_shuffled_statements, context = (
+    one_batch.model,
+    one_batch.batched_shuffled_statements,
+    one_batch.context,
+  )
+  batched_shuffled_responses = None
+  while batched_shuffled_responses is None:
+    extracted_response = None
+    while extracted_response is None:
+      logger.info(batched_shuffled_statements)
+      extracted_response = model.ask(Question(context, str(batched_shuffled_statements if SPECIFY_FORMATTING else batched_shuffled_statements["prompt"])))
+      logger.info(extracted_response)
+
+    # LLM responses to shuffled questions.
+    for parse_fn in (json_extractor, partial(raw_extractor, batched_shuffled_statements["id"])): # dict_extractor):
+      try:
+        batched_shuffled_responses = parse_fn(extracted_response)
+        break
+      except Exception as e:
+        logger.error(e)
+
+  logger.info(batched_shuffled_responses)
+  if BATCHED:
+    if "answer" not in batched_shuffled_responses:
+      batched_shuffled_responses = None
+      return None
+    # shuffled_responses.append(batched_shuffled_responses)
+    return [batched_shuffled_responses]
+  else:
+    return batched_shuffled_responses
+
+def ask_all_questions(model: Model, prompts: Prompts, trial_number: int) -> List[Dict]:
+  # Keep trying until we get a valid response.
+  while True:
     # Shuffle questions.
-    shuffled_statements_without_shuffled_id = shuffle(statements)
+    shuffled_statements_without_shuffled_id = shuffle(prompts.statements)
     shuffled_id_to_original_id = {
       f"{idx}": statement["id"]
       for idx, statement
@@ -103,45 +140,37 @@ def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
       shuffled_statements.append(shuffled_statement)
 
     # Give LLM shuffled questions.
-    shuffled_responses: List[Dict] = []
-    for batched_shuffled_statements in batched(shuffled_statements, n=int(BATCHED) or None, singletons=False):
-      batched_shuffled_responses = None
-      while batched_shuffled_responses is None:
-        extracted_response = None
-        while extracted_response is None:
-          logger.info(batched_shuffled_statements)
-          extracted_response = model.ask(Question(context, str(batched_shuffled_statements if SPECIFY_FORMATTING else batched_shuffled_statements["prompt"])))
-          logger.info(extracted_response)
-
-        # LLM responses to shuffled questions.
-        for parse_fn in (json_extractor, partial(raw_extractor, batched_shuffled_statements["id"])): # dict_extractor):
-          try:
-            batched_shuffled_responses = parse_fn(extracted_response)
-            break
-          except Exception as e:
-            logger.error(e)
-
-      logger.info(batched_shuffled_responses)
-      if BATCHED:
-        if "answer" not in batched_shuffled_responses:
-          batched_shuffled_responses = None
-          continue
-        shuffled_responses.append(batched_shuffled_responses)
-      else:
-        shuffled_responses = batched_shuffled_responses
+    with ThreadPoolExecutor(max_workers=100) as executor:
+      shuffled_responses: List[Dict] = itertools.chain(*executor.map(
+        ask_one_batch, [
+          OneBatch(model=model, batched_shuffled_statements=batched_shuffled_statements, context=prompts.context) 
+          for batched_shuffled_statements in batched(shuffled_statements, n=int(BATCHED) or None, singletons=False)
+        ]
+      ))
 
     # Unshuffle questions and check ids.
     responses: List[Response] = []
-    ids_not_seen = set(map(str, range(1, len(statements)+1)))
+    ids_not_seen = set(map(str, range(1, len(prompts.statements)+1)))
     for shuffled_response in shuffled_responses:
       response = copy.deepcopy(shuffled_response)
       response["id"] = shuffled_id_to_original_id[str(response["id"])]
-      ids_not_seen.remove(response["id"])
+      try:
+        ids_not_seen.remove(response["id"])
+      except KeyError:
+        logger.error("the response id returned by the model incorrect. trying again...")
+        continue
       responses.append(Response(answer=response["answer"], id=int(response["id"]), trial_number=trial_number))
 
-    logger.info(responses)
-    all_responses.append(responses)
+    break
 
+  logger.info(responses)
+  return responses
+
+def collect_responses(model: Model, prompts: Prompts) -> pd.DataFrame:
+  all_responses: List[List[Response]] = [
+    ask_all_questions(model, prompts, trial_number)
+    for trial_number in tqdm(range(1, TRIALS+1), desc="trial")
+  ]
 
   df = pd.DataFrame(
     data=[

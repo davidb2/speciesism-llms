@@ -1,7 +1,6 @@
 import os
 
 import openai
-import backoff
 
 
 from typing import Any
@@ -19,7 +18,6 @@ class GPT(Model):
   def setup(self):
     openai.api_key = os.getenv("OPENAI_API_KEY")
 
-  #@backoff.on_exception(backoff.expo, openai.error.RateLimitError, max_time=60)
   def _complete(self, question: Question) -> Any:
     endpoint = openai.ChatCompletion if self.chat else openai.Completion
     messages = [
