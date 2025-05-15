@@ -58,6 +58,7 @@ MODELS = {
   "gpt-3.5-turbo-instruct": GPT(name="gpt-3.5-turbo-instruct", temperature=TEMPERATURE),
   "grok-3": Grok(name="grok-3", temperature=TEMPERATURE),
   "llama-4-maverick": Fireworks(name="accounts/fireworks/models/llama4-maverick-instruct-basic", temperature=TEMPERATURE),
+  "qwen-3": Fireworks(name="accounts/fireworks/models/qwen3-235b-a22b", temperature=TEMPERATURE),
 }
 
 def json_extractor(string):
@@ -158,15 +159,15 @@ def ask_all_questions(model: Model, prompts: Prompts, trial_number: int) -> List
     ids_not_seen = set(map(str, range(1, len(prompts.statements)+1)))
     for shuffled_response in shuffled_responses:
       response = copy.deepcopy(shuffled_response)
-      response["id"] = shuffled_id_to_original_id[str(response["id"])]
       try:
+        response["id"] = shuffled_id_to_original_id[str(response["id"])]
         ids_not_seen.remove(response["id"])
       except KeyError:
         logger.error("the response id returned by the model incorrect. trying again...")
-        continue
+        break
       responses.append(Response(answer=response["answer"], id=int(response["id"]), trial_number=trial_number))
-
-    break
+    else:
+      break
 
   logger.info(responses)
   return responses
