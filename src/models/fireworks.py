@@ -25,6 +25,7 @@ class Fireworks(Model):
       model=self.name,
       messages=messages,
       temperature=self.temperature,
+      # max_tokens=20000,
       stream=False,
     )
 

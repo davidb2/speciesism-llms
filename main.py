@@ -69,6 +69,14 @@ def json_extractor(string):
 def dict_extractor(string):
   return dict(JSON_KEY_VALUE_PATTERN.findall(string))
 
+def thinking_extractor(string: str):
+  res = string.split('</think>')[1]
+  jsons = JSON_PATTERN.findall(res)
+  return json.loads(
+    regex.sub('""+', '"', jsons[0]),
+    strict=False,
+  )
+
 def raw_extractor(id, string):
   return {
     "id": id,
@@ -109,7 +117,7 @@ def ask_one_batch(one_batch: OneBatch) -> List[Dict]:
       logger.info(extracted_response)
 
     # LLM responses to shuffled questions.
-    for parse_fn in (json_extractor, partial(raw_extractor, batched_shuffled_statements["id"])): # dict_extractor):
+    for parse_fn in (thinking_extractor, json_extractor):#, partial(raw_extractor, batched_shuffled_statements["id"])): # dict_extractor):
       try:
         batched_shuffled_responses = parse_fn(extracted_response)
         break

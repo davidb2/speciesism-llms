@@ -8,3 +8,14 @@ Use double quotes for strings.
 Using this JSON schema:
   Response = {"id": str, "answer": str}
 Return a `Response` or an array of `Response`s if an array of questions are given to you.
+For example, if the given id was 91, then we would expect:
+```
+{
+  "id": "91",
+  "answer": "2"
+}
+```
+But the answer could differ depending on your response.
+It is very important that the answer be formatted this way.
+Do not tell me your reasoning.
+Just the answer please.
