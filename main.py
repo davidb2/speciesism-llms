@@ -52,6 +52,7 @@ MODELS = {
   "claude-3.5-sonnet": Claude(name="claude-3-5-sonnet-20240620", temperature=TEMPERATURE),
   "deepseek-r1": Deepseek(name="deepseek-reasoner", temperature=TEMPERATURE),
   "gemini-1.5-pro": Gemini(name="gemini-1.5-pro", temperature=TEMPERATURE),
+  "gpt-5": GPT(name="gpt-5-2025-08-07", temperature=TEMPERATURE),
   "gpt-4o": GPT(name="gpt-4o", temperature=TEMPERATURE),
   "gpt-4": GPT(name="gpt-4", temperature=TEMPERATURE),
   "gpt-3.5-turbo": GPT(name="gpt-3.5-turbo", temperature=TEMPERATURE),
